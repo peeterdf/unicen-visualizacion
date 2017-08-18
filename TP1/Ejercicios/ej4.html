@@ -8,27 +8,24 @@
 	</body>
 	<script>
 	var ctx =document.getElementById("canvas").getContext("2d");
-	var width=900;
+ 	var width=900;
 	var height=600;
 	var imageData =ctx.createImageData(width,height);
-	var r= Math.floor(Math.random()*255 +1);
-	var g= Math.floor(Math.random()*255 +1);
-	var b= Math.floor(Math.random()*255 +1);
+	var r= 0;
+	var g= 0;
+	var b= 0;
 	var a= 255;
 	for(x=0; x<width/2; x++){
 		for(y=0; y<height; y++){
-			setPixel(imageData,x,y,r,g,b,a);
+			setPixel(imageData,x,y,Math.floor((255/width*2)*x),Math.floor((255/width*2)*x),0,a);
 		}
 	}
-	var rr= Math.floor(Math.random()*255 +1);
-	var gg= Math.floor(Math.random()*255 +1);
-	var bb= Math.floor(Math.random()*255 +1);
-	var aa= 255;
+for(y=0; y<height; y++){
 	for(x=width/2; x<width; x++){
-		for(y=0; y<height; y++){
-			setPixel(imageData,x,y,rr,gg,bb,aa);
+			setPixel(imageData,x,y,255,(255-Math.floor(x/width*255))*2,0,a);
 		}
 	}
+
 	ctx.putImageData(imageData,0,0);
 	function setPixel(imageData,x,y,r,g,b,a){
 		index= (x+y*imageData.width)*4;
@@ -37,7 +34,5 @@
 		imageData.data[index+2] =b;
 		imageData.data[index+3] =a;
 	}
-
-
-  	</script>
-  </html>
+	</script>
+</html>
