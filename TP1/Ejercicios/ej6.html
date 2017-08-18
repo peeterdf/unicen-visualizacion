@@ -1,23 +1,159 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Template</title>
-	</head>
-		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
-	</body>
+<head>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Ejercicio 6</title>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+
+        <li><a href="#" onClick="filtroByN();">Blanco y negro</a></li>
+        <li><a href="#" onClick="filtroNegativo();">Negativo</a></li>
+				<li><a href="#" onClick="filtroSepia();">Sepia</a></li>
+				<li><a href="#" onClick="filtroBrillo();">Brillo</a></li>
+				<li><a href="#" onClick="filtroBinarizacion();">Binarizacion</a></li>
+
+
+				<li><a href="#" >saturacion 0 a 100</a></li>
+				<li><a href="#" >blur</a></li>
+				<li><a href="#" >suavizado</a></li>
+				<li><a href="#" >deteccion bordes</a></li>
+				<li><a href="#" onClick="restablecerimg(imgRespaldo);">Restablecer</a></li>
+      </ul>
+			<form class="navbar-form navbar-left">
+        <div class="form-group">
+				<input id="img-input" onchange="cargaimg()" type="file" name="name" value="">
+      </div>
+		</form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="col-md-12">
+	<button onClick="filtroByN();">Filtro B y N</button>
+<div class="col-md-1">
+	<input id="byn" onchange="filtroByN()" type="range" name="valorbyn" min="-255" max="255" step="1" value="255" width="50%" >
+</div>
+
+</div>
+
+<div>
+	<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
+</div>
+</body>
 	<script>
-		  var ctx =document.getElementById("canvas").getContext("2d");
+	var ctx =document.getElementById("canvas").getContext("2d");
+	var image1 = new Image();
+	var imgRespaldo = new Image();
 
-			var image1 = new Image();
-			image1.src= "imagen1.jpg";
+	function restablecerimg (image){
+		ctx.drawImage(image,0,0);
+	}
+	function cargaimg() {
+		console.log(document.getElementById("img-input").files[0].name);
+		image1.src=document.getElementById("img-input").files[0].name;
+		imgRespaldo.src=image1.src;
+		image1.onload = function(){
+			ctx.clearRect(0,0,900,600);
+		 myDrawImageMethod(this);
+	 }
+	}
 
-			image1.onload = function(){
-				myDrawImageMethod(this);
+ function getRed(imageData,x,y){
+	 index = (x+y*imageData.width)*4;
+	 return imageData.data[index+0];
+ }
+ function getGreen(imageData,x,y){
+	 index = (x+y*imageData.width)*4;
+	 return imageData.data[index+1];
+ }
+ function getBlue(imageData,x,y){
+	 index = (x+y*imageData.width)*4;
+	 return imageData.data[index+2];
+ }
+
+ function setPixel(imageData,x,y,r,g,b,a){
+		index= (x+y*imageData.width)*4;
+		imageData.data[index+0] =r;
+		imageData.data[index+1] =g;
+		imageData.data[index+2] =b;
+		imageData.data[index+3] =a;
+	}
+
+ function myDrawImageMethod (image){
+	 ctx.drawImage(image,0,0);
+ }
+
+ function filtroByN(){
+	 restablecerimg(imgRespaldo);
+	 var valor=document.getElementById("byn").value;
+	 image=image1;
+	 imageData = ctx.getImageData(0,0,image.width,image.height);
+		for(y=0; y<image.height; y++){
+			for(x=0; x<image.width; x++){
+					var pixelbyn= Math.floor((getRed(imageData,x,y)+getGreen(imageData,x,y)+getBlue(imageData,x,y)/3)+valor/2);
+					setPixel(imageData,x,y,pixelbyn,pixelbyn,pixelbyn,255);
 			}
+		}
+		 ctx.putImageData(imageData,0,0);
+ }
 
-			function myDrawImageMethod (image){
-				ctx.drawImage(image,0,0);
+ function filtroNegativo(){
+	 image=image1;
+	 imageData = ctx.getImageData(0,0,image.width,image.height);
+		for(y=0; y<image.height; y++){
+			for(x=0; x<image.width; x++){
+					setPixel(imageData,x,y,255-getRed(imageData,x,y),255-getGreen(imageData,x,y),255-getBlue(imageData,x,y),255);
 			}
+		}
+		 ctx.putImageData(imageData,0,0);
+ }
+
+ function filtroSepia(){
+	 image=image1;
+	 imageData = ctx.getImageData(0,0,image.width,image.height);
+		for(y=0; y<image.height; y++){
+			for(x=0; x<image.width; x++){
+					setPixel(imageData,x,y,255-getRed(imageData,x,y),255-getGreen(imageData,x,y),255-getBlue(imageData,x,y),255);
+			}
+		}
+		 ctx.putImageData(imageData,0,0);
+ }
+
+ function filtroBrillo(){
+	 image=image1;
+	 imageData = ctx.getImageData(0,0,image.width,image.height);
+		for(y=0; y<image.height; y++){
+			for(x=0; x<image.width; x++){
+					setPixel(imageData,x,y,255-getRed(imageData,x,y),255-getGreen(imageData,x,y),255-getBlue(imageData,x,y),255);
+			}
+		}
+		 ctx.putImageData(imageData,0,0);
+ }
+
+ function filtroBinarizacion(){
+	 image=image1;
+	 imageData = ctx.getImageData(0,0,image.width,image.height);
+		for(y=0; y<image.height; y++){
+			for(x=0; x<image.width; x++){
+					setPixel(imageData,x,y,255-getRed(imageData,x,y),255-getGreen(imageData,x,y),255-getBlue(imageData,x,y),255);
+			}
+		}
+		 ctx.putImageData(imageData,0,0);
+ }
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </html>

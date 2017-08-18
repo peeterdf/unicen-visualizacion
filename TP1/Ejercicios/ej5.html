@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Template</title>
+		<title>Ejercicio 5</title>
 	</head>
 	<body>
 	<div>
@@ -13,67 +13,55 @@
 		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
 	</div>
 	</body>
+
+
 	<script>
+		var ctx =document.getElementById("canvas").getContext("2d");
+		var image1 = new Image();
+		function cargaimg() {
+			console.log(document.getElementById("img-input").files[0].name);
+			image2.src=document.getElementById("img-input").files[0].name;
+			image2.onload = function(){
+				ctx.clearRect(0,0,900,600);
+	 		 myDrawImageMethod(this);
+	 	 }
+		}
 
-	var ctx =document.getElementById("canvas").getContext("2d");
-
-	function cargaimg() {
-		var image2 = new Image();
-		console.log(document.getElementById("img-input").value);
-		image2.src=document.getElementById("img-input").value;
-		image2.onload = function(){
- 		 myDrawImageMethod(this);
- 	 }
-	}
-
-	var image1 = new Image();
-
-	image1.crossOrigin="Anonymous";
-	image1.src= "https://http2.mlstatic.com/50-globos-lisos-comunes-color-o-multicolor-super-oferta-D_NQ_NP_20528-MLA20192566150_112014-F.jpg";
-
-	 image1.onload = function(){
-		 myDrawImageMethod(this);
+	 function getRed(imageData,x,y){
+		 index = (x+y*imageData.width)*4;
+		 return imageData.data[index+0];
+	 }
+	 function getGreen(imageData,x,y){
+		 index = (x+y*imageData.width)*4;
+		 return imageData.data[index+1];
+	 }
+	 function getBlue(imageData,x,y){
+		 index = (x+y*imageData.width)*4;
+		 return imageData.data[index+2];
 	 }
 
- function getRed(imageData,x,y){
-	 index = (x+y*imageData.width)*4;
-	 return imageData.data[index+0];
- }
- function getGreen(imageData,x,y){
-	 index = (x+y*imageData.width)*4;
-	 return imageData.data[index+1];
- }
- function getBlue(imageData,x,y){
-	 index = (x+y*imageData.width)*4;
-	 return imageData.data[index+2];
- }
-
- function setPixel(imageData,x,y,r,g,b,a){
-		index= (x+y*imageData.width)*4;
-		imageData.data[index+0] =r;
-		imageData.data[index+1] =g;
-		imageData.data[index+2] =b;
-		imageData.data[index+3] =a;
-	}
-
- function myDrawImageMethod (image){
-	 ctx.drawImage(image,0,0);
-
- }
- function filtroByN(){
- image=image1;
- imageData = ctx.getImageData(0,0,image.width,image.height);
-
-	for(y=0; y<image.height; y++){
-		for(x=0; x<image.width; x++){
-				var pixelbyn= Math.floor(getRed(imageData,x,y)+getGreen(imageData,x,y)+getBlue(imageData,x,y)/3);
-				setPixel(imageData,x,y,pixelbyn,pixelbyn,pixelbyn,255);
+	 function setPixel(imageData,x,y,r,g,b,a){
+			index= (x+y*imageData.width)*4;
+			imageData.data[index+0] =r;
+			imageData.data[index+1] =g;
+			imageData.data[index+2] =b;
+			imageData.data[index+3] =a;
 		}
-	}
 
+	 function myDrawImageMethod (image){
+		 ctx.drawImage(image,0,0);
+	 }
 
-
-	 ctx.putImageData(imageData,0,0);
- }
+	 function filtroByN(){
+		 image=image1;
+		 imageData = ctx.getImageData(0,0,image.width,image.height);
+			for(y=0; y<image.height; y++){
+				for(x=0; x<image.width; x++){
+						var pixelbyn= Math.floor(getRed(imageData,x,y)+getGreen(imageData,x,y)+getBlue(imageData,x,y)/3);
+						setPixel(imageData,x,y,pixelbyn,pixelbyn,pixelbyn,255);
+				}
+			}
+			 ctx.putImageData(imageData,0,0);
+	 }
  </script>
 </html>
