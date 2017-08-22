@@ -20,9 +20,9 @@
 		var image1 = new Image();
 		function cargaimg() {
 			console.log(document.getElementById("img-input").files[0].name);
-			image2.src=document.getElementById("img-input").files[0].name;
-			image2.onload = function(){
-				ctx.clearRect(0,0,900,600);
+			image1.src=document.getElementById("img-input").files[0].name;
+			image1.onload = function(){
+			ctx.clearRect(0,0,900,600);
 	 		 myDrawImageMethod(this);
 	 	 }
 		}
@@ -53,6 +53,7 @@
 	 }
 
 	 function filtroByN(){
+		 var image;
 		 image=image1;
 		 imageData = ctx.getImageData(0,0,image.width,image.height);
 			for(y=0; y<image.height; y++){

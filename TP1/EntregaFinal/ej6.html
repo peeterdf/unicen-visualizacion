@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link rel="stylesheet" href="css/filtros.css">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Ejercicio 6</title>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+
+
+				<a href="#" onClick="restablecerimg(imgRespaldo);">Restablecer</a>
+      </ul>
+			<form class="navbar-form navbar-left">
+        <div class="form-group">
+				<input id="img-input" onchange="cargaimg()" type="file" name="name" value="">
+      </div>
+		</form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="col-md-2 panel-lateral" >
+		<button onClick="filtroByN();">Filtro B y N</button>
+		<button type="button" class="button-filtro"  onClick="filtroByN();">Blanco y negro</button>
+		<button type="button" class="button-filtro"  onClick="filtroNegativo();">Negativo</button>
+		<button type="button" class="button-filtro"  onClick="filtroSepia();">Sepia</button>
+		<button type="button" class="button-filtro"  onClick="filtroBrillo();">Brillo</button>
+		<div class="col-md-8">
+			<input id="brillo" onchange="filtroBrillo()" type="range" name="valorbyn" min="-255" max="255" step="1" value="255" width="50%" >
+		</div>
+		<button type="button" class="button-filtro"  onClick="filtroBinarizacion();">Binarizacion</button>
+
+
+		<button type="button" class="button-filtro"  >saturacion 0 a 100</button>
+		<button type="button" class="button-filtro"  >blur</button>
+		<button type="button" class="button-filtro"  >suavizado</button>
+		<button type="button" class="button-filtro"  >deteccion bordes</button>
+
+
+</div>
+<div class="col-md-10 panel-central">
+	<div class="img-principal col-md-9">
+	<canvas id="canvas" width="600" height="500" style="border:#000 solid 1px;" />
+	</div>
+	<div class="">
+		<canvas id="canvas-mini" width="200" height="200" style="border:#000 solid 1px;" />
+	</div>
+</div>
+</body>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="js/filtros.js"></script>
+</html>
