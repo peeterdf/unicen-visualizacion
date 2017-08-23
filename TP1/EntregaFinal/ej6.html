@@ -13,25 +13,19 @@
 	<title>Ejercicio 6</title>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-  <div class="container-fluid">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+	<header>
 
 
+		<div id="logo" class="col-md-2">
+				<img src="instagram.ico" alt="logo">
+		</div>
 
-				<a href="#" onClick="restablecerimg(imgRespaldo);">Restablecer</a>
-      </ul>
-			<form class="navbar-form navbar-left">
-        <div class="form-group">
-				<input id="img-input" onchange="cargaimg()" type="file" name="name" value="">
-      </div>
-		</form>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
+		<div id="toolbar" class="col-md-10">
+			<input id="img-input" class="col-md-4" onchange="cargaimg()" type="file" name="name" value="">
+			<button onClick="restablecerimg(imgRespaldo);">Restablecer</button>
+			<button onClick="putImage();">Guardar</button>
+		</div>
+	</header>
 <div class="col-md-2 panel-lateral" >
 		<button onClick="filtroByN();">Filtro B y N</button>
 		<button type="button" class="button-filtro"  onClick="filtroByN();">Blanco y negro</button>
@@ -53,10 +47,10 @@
 </div>
 <div class="col-md-10 panel-central">
 	<div class="img-principal col-md-9">
-	<canvas id="canvas" width="600" height="500" style="border:#000 solid 1px;" />
+	<canvas id="canvas" width="600" height="500"  />
 	</div>
 	<div class="">
-		<canvas id="canvas-mini" width="200" height="200" style="border:#000 solid 1px;" />
+		<canvas id="canvas-mini" width="200" height="200"  />
 	</div>
 </div>
 </body>

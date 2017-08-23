@@ -1,6 +1,7 @@
 body{
   height: 100%;
   position: absolute;
+  background-color: rgb(28, 17, 41) !important;
 }
 
 .panel-lateral{
@@ -12,7 +13,9 @@ body{
 .panel-central{
   padding-top: 10px;
   height: 100%;
-  background-color: rgb(63, 61, 66);
+  background-color: rgb(200, 195, 160);
+  border-radius: 15px 0px 0px 0px;
+  border: 2px solid #a1a1a1;
 }
 
 .button-filtro{
@@ -21,4 +24,29 @@ body{
 }
 #canvas-mini{
   border:#000 solid 1px;
+  background-color: white;
+}
+#canvas{
+  border:#000 solid 1px;
+  background-color: white;
+}
+
+#logo img{
+  width: 50px;
+  height: 50px;
+  display: block;
+  align-items: center;
+}
+#toolbar{
+  height: 100%;
+}
+
+header{
+  height: 60px;
+  background-color: rgb(28, 17, 41);
+}
+#logo{
+  float:left;
+  padding: 10px;
+  height: 100%;
 }

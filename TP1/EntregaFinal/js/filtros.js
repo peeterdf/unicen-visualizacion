@@ -1,17 +1,17 @@
 //use strict";
 
-
+var c=document.getElementById("canvas");
 var ctx =document.getElementById("canvas").getContext("2d");
 var ctx2 =document.getElementById("canvas-mini").getContext("2d");
+
 var image1 = new Image();
 var imgRespaldo = new Image();
 
 
 function restablecerimg (image){
-  ctx.drawImage(image,0,0);
+   myDrawImageMethod(image,ctx,document.getElementById("canvas").width,document.getElementById("canvas").height );
 }
 function cargaimg() {
-  console.log(document.getElementById("img-input").files[0].name);
   image1.src=document.getElementById("img-input").files[0].name;
   imgRespaldo.src=image1.src;
   image1.onload = function(){
@@ -46,15 +46,17 @@ function setPixel(imageData,x,y,r,g,b,a){
 }
 
 function myDrawImageMethod (image, ctx,ctxwidth,ctxheight){
-//ctx.drawImage(image, 0, 0, image.width,    image.height, 0, 0, ctxwidth ,ctxheight );
- ctx.drawImage(image,0,0);
+  if (image.width>image.height){
+    ctx.drawImage(image, 0, ((ctxheight-(ctxwidth/image.width)*image.height)/2), ctxwidth,(ctxwidth/image.width)*image.height );
+  }else{
+    ctx.drawImage(image, ((ctxwidth-(ctxheight/image.height)*image.width)/2), 0, ((ctxheight/image.height)*image.width),ctxheight );
+  }
 }
 
 function filtroByN(){
  restablecerimg(imgRespaldo);
 
-
- var imageData = ctx.getImageData(0,0,image1.width,image1.height);
+ var imageData = ctx.getImageData(0,0,c.width,image1.height);
   for(y=0; y<image1.height; y++){
     for(x=0; x<image1.width; x++){
         var pixelbyn= Math.floor(getRed(imageData,x,y)+getGreen(imageData,x,y)+getBlue(imageData,x,y)/3);
@@ -110,4 +112,14 @@ function filtroBinarizacion(){
     }
   }
    ctx.putImageData(imageData,0,0);
+}
+
+
+
+function putImage(){
+
+  var myImage = c.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  window.location.href=myImage;
+
+
 }
