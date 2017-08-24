@@ -23,6 +23,7 @@ body{
   margin-bottom: 5px;
 }
 .filter-opt p{
+  margin-bottom: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: center;
@@ -33,15 +34,26 @@ body{
   background-color: #a1a1a1 ;
 }
 
+.filter-opt:hover{
+	background-color: white;
+	cursor: pointer;
+}
+
 hr{
   margin-top: 5px;
   margin-bottom: 5px;
 }
-#canvas-mini{
+#canvas{
   border:#000 solid 1px;
   background-color: white;
 }
-#canvas{
+
+.img-principal , .img-mini{
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#canvas-mini{
   border:#000 solid 1px;
   background-color: white;
 }
@@ -54,6 +66,29 @@ hr{
 }
 #toolbar{
   height: 100%;
+  padding: 10px;
+}
+
+#img-input {
+    display: none;
+}
+.button-toolbar {
+    border: 1px solid #FFF;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+	color: white;
+	background-color: transparent;
+	font-weight: 700;
+	margin-right: 15px;
+}
+
+#btn-download{
+  text-decoration: none;
+}
+.button-toolbar:hover{
+  color: transparent;
+  text-shadow: 2px -2px white;
 }
 
 header{

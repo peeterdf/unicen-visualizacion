@@ -21,34 +21,39 @@
 		</div>
 
 		<div id="toolbar" class="col-md-10">
+			<label for="img-input" class="button-toolbar">Cargar imagen</label>
 			<input id="img-input" class="col-md-4" onchange="cargaimg()" type="file" name="name" value="">
-			<button onClick="restablecerimg(imgRespaldo);">Restablecer</button>
-			<button onClick="putImage();">Guardar</button>
+			<button class="button-toolbar" onClick="restablecerimg(imgRespaldo);">Restablecer</button>
+			<a href="#" class="button-toolbar" id="btn-download" download="micanvas.png">Guardar</a>
 		</div>
+
 	</header>
 <div class="col-md-2 panel-lateral" >
 		<hr>
-		<div class="filter-opt">
+		<div class="filter-opt" onClick="filtroByN();">
 				<p>Blanco y negro</p>
 		</div>
 		<hr>
-		<div class="filter-opt">
+		<div class="filter-opt" onClick="filtroNegativo();">
 				<p>Negativo</p>
 		</div>
 		<hr>
-		<div class="filter-opt">
+		<div class="filter-opt" onClick="filtroBrillo();">
 				<p>Brillo</p>
+				<input id="brillo" onchange="filtroBrillo()" type="range" name="valorbyn" min="-255" max="255" step="1" value="50" width="50%" >
+
 		</div>
 		<hr>
-		<button onClick="filtroByN();">Filtro B y N</button>
-		<button type="button" class="button-filtro"  onClick="filtroByN();">Blanco y negro</button>
-		<button type="button" class="button-filtro"  onClick="filtroNegativo();">Negativo</button>
-		<button type="button" class="button-filtro"  onClick="filtroSepia();">Sepia</button>
-		<button type="button" class="button-filtro"  onClick="filtroBrillo();">Brillo</button>
-		<div class="col-md-8">
-			<input id="brillo" onchange="filtroBrillo()" type="range" name="valorbyn" min="-255" max="255" step="1" value="255" width="50%" >
+		<div class="filter-opt" onClick="filtroBinarizacion();">
+				<p>Binarizacion</p>
+				<input id="bin-gradient"  onchange="filtroBrillo()" type="range" name="valorbyn" min="-255" max="255" step="1" value="50" width="50%" >
+
 		</div>
-		<button type="button" class="button-filtro"  onClick="filtroBinarizacion();">Binarizacion</button>
+		<hr>
+		<div class="filter-opt" onClick="filtroSepia();">
+				<p>Sepia</p>
+		</div>
+		<hr>
 
 
 		<button type="button" class="button-filtro"  >saturacion 0 a 100</button>
@@ -62,7 +67,7 @@
 	<div class="img-principal col-md-9">
 	<canvas id="canvas" width="600" height="500"  />
 	</div>
-	<div class="">
+	<div class="img-mini">
 		<canvas id="canvas-mini" width="200" height="200"  />
 	</div>
 </div>
