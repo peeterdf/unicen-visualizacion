@@ -152,6 +152,123 @@ restablecerimg(imgRespaldo);
 }
 
 
+
+
+
+function rgbToHsl(r, g, b) {
+   r /= 255, g /= 255, b /= 255;
+
+   var max = Math.max(r, g, b), min = Math.min(r, g, b);
+   var h, s, l = (max + min) / 2;
+
+   if (max == min) {
+     h = s = 0;
+   } else {
+     var d = max - min;
+     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+     switch (max) {
+       case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+       case g: h = (b - r) / d + 2; break;
+       case b: h = (r - g) / d + 4; break;
+     }
+
+     h /= 6;
+   }
+   return [ h, s, l ];
+ }
+
+ function hslToRgb(h, s, l) {
+  var r, g, b;
+
+  if (s == 0) {
+    r = g = b = l;
+  } else {
+    function hue2rgb(p, q, t) {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    }
+
+    var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    var p = 2 * l - q;
+
+    r = hue2rgb(p, q, h + 1/3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1/3);
+  }
+
+  return [ r * 255, g * 255, b * 255 ];
+}
+
+
+function filtroSaturacion(){
+
+	restablecerimg(imgRespaldo);
+	imageData = ctx.getImageData(0,0,c.width,c.height);
+	var valor = parseInt(document.getElementById("sat-gradient").value);
+   for(y=desdeh; y<maxh; y++){
+    for(x=desdew; x<maxw; x++){
+       var pixr= getRed(imageData,x,y);
+	   var pixg= getGreen(imageData,x,y);
+	   var pixb= getBlue(imageData,x,y);
+
+		var hsl = rgbToHsl(pixr,pixg,pixb);
+        hsl[1] =  valor;
+        var rgb = hslToRgb(hsl[0],hsl[1],hsl[2]);
+          setPixel(imageData,x,y,rgb[0],rgb[1],rgb[2],255);
+        }
+      }
+      ctx.putImageData(imageData,0,0);
+}
+
+function aplicarMatriz(matrix,suma){
+  restablecerimg(imgRespaldo);
+  imageData = ctx.getImageData(0,0,c.width,c.height);
+  var newImageData = ctx.createImageData(c.width,c.height);
+
+   for(y=desdeh+1; y<maxh-1; y++){
+     for(x=desdew+1; x<maxw-1; x++){
+      var r= Math.floor(( getRed(imageData,x-1,y-1)*matrix[0][0] + getRed(imageData,x,y-1)*matrix[0][1] + getRed(imageData,x+1,y-1)*matrix[0][2] +
+                getRed(imageData,x-1,y)*matrix[1][0] + getRed(imageData,x,y)*matrix[1][1] + getRed(imageData,x+1,y)*matrix[1][2] +
+                getRed(imageData,x-1,y+1)*matrix[2][0] + getRed(imageData,x,y-1)*matrix[2][1] + getRed(imageData,x+1,y+1)*matrix[2][2])/suma);
+        var b= Math.floor(( getBlue(imageData,x-1,y-1)*matrix[0][0] + getBlue(imageData,x,y-1)*matrix[0][1] + getBlue(imageData,x+1,y-1)*matrix[0][2] +
+                 getBlue(imageData,x-1,y)*matrix[1][0] + getBlue(imageData,x,y)*matrix[1][1] + getBlue(imageData,x+1,y)*matrix[1][2] +
+                 getBlue(imageData,x-1,y+1)*matrix[2][0] + getBlue(imageData,x,y-1)*matrix[2][1] + getBlue(imageData,x+1,y+1)*matrix[2][2])/suma);
+       var g= Math.floor(( getGreen(imageData,x-1,y-1)*matrix[0][0] + getGreen(imageData,x,y-1)*matrix[0][1] + getGreen(imageData,x+1,y-1)*matrix[0][2] +
+                getGreen(imageData,x-1,y)*matrix[1][0] + getGreen(imageData,x,y)*matrix[1][1] + getGreen(imageData,x+1,y)*matrix[1][2] +
+                getGreen(imageData,x-1,y+1)*matrix[2][0] + getGreen(imageData,x,y-1)*matrix[2][1] + getGreen(imageData,x+1,y+1)*matrix[2][2])/suma);
+
+
+
+        setPixel(newImageData,x,y,r,g,b,255);
+      }
+    }
+  ctx.putImageData(newImageData,0,0);
+}
+
+function filtroBlur(){
+  restablecerimg(imgRespaldo);
+  var matriz=[[1,1,1],[1,1,1],[1,1,1]];
+  aplicarMatriz(matriz,9);
+}
+
+function filtroSuavizado(){
+  restablecerimg(imgRespaldo);
+  var matriz=[[1,1,1],[1,8,1],[1,1,1]];
+  aplicarMatriz(matriz,16);
+}
+
+function filtroBordes(){
+  restablecerimg(imgRespaldo);
+  var matriz=[[-1,0,1],[-1,1,1],[-1,0,1]];
+  aplicarMatriz(matriz,9);
+}
+
+
 var button = document.getElementById('btn-download');
 button.addEventListener('click', function (e) {
     var dataURL = c.toDataURL('image/png');
