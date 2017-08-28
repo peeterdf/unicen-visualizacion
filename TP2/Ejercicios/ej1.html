@@ -15,12 +15,18 @@
 		 	var height=600;
 		 	var imageData =ctx.createImageData(width,height);
 
-			function colorear(){
-				document.getElementById('canvas').style.backgroundColor = 'red';
+			function colorear(color){
+				document.getElementById('canvas').style.backgroundColor = color;
 			};
 
 			canvas.onmousemove= function(event){
-				colorear();
+				colorear('red');
+			};
+			canvas.onmouseleave= function(event){
+				colorear('blue');
+			};
+			canvas.onclick= function(event){
+				colorear('black');
 			};
 
 	</script>

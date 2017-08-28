@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+</body>
+		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
+	</body>
+	<script>
+		   //http://www.javascripture.com/
+			var canvas = document.getElementById("canvas");
+			var ctx =document.getElementById("canvas").getContext("2d");
+		 	var width=900;
+		 	var height=600;
+		 	var imageData =ctx.createImageData(width,height);
+
+			function Circle(){
+				this.posX = 4;
+				this.posy = 4;
+				this.radio = 10;
+				this.color = '#141444';
+			}
+
+			function Circle(paramPosX, paramPosY, paramRadio, paramColor){
+				this.posX = paramPosX;
+				this.posY = paramPosY;
+				this.radio = paramRadio;
+				this.color = paramColor;
+			}
+
+			Circle.prototype.message = function(){
+				alert('soy circulito con radio:'+this.radio);
+			}
+
+			Circle.prototype.dibujar = function(){
+				ctx.fillStyle = this.color;
+				ctx.beginPath();
+				ctx.arc(this.posX,this.posY,this.radio,0,Math.PI * 2);
+				ctx.fill();
+				ctx.closePath();
+
+				ctx.beginPath();
+				ctx.arc(this.posX,this.posY,this.radio,0,Math.PI * 2);
+				ctx.lineWidth =15;
+				ctx.lineCap = 'round';
+				ctx.strokeStyle = 'black';
+				ctx.stroke();
+				ctx.closePath();
+			}
+
+			var circulo1 = new Circle(100,250,80,'#cf1404');
+			var circulo2 = new Circle(200,250,80,'#a81404');
+			var circulo3 = new Circle(300,250,80,'#57404');
+			var circulo4 = new Circle(400,250,80,'#241404');
+			var img = new Image();
+			img.src='cara.png';
+			img.onload=function(){
+				var image = ctx.createPattern(img,"repeat");
+				var circulo5 = new Circle(500,250,80,image);
+				circulo5.dibujar();
+			}
+
+
+			 circulo1.dibujar();
+			 circulo2.dibujar();
+			 circulo3.dibujar();
+			 circulo4.dibujar();
+
+
+
+	</script>
+</html>
