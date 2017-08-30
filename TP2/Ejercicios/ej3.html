@@ -49,23 +49,16 @@
 				ctx.closePath();
 			}
 
-			var circulo1 = new Circle(100,250,80,'#cf1404');
-			var circulo2 = new Circle(200,250,80,'#a81404');
-			var circulo3 = new Circle(300,250,80,'#57404');
-			var circulo4 = new Circle(400,250,80,'#241404');
-			var img = new Image();
-			img.src='cara.png';
-			img.onload=function(){
-				var image = ctx.createPattern(img,"repeat");
-				var circulo5 = new Circle(500,250,80,image);
-				circulo5.dibujar();
+			Circle.prototype.setimage = function(image){
+				this.color = image;
+				this.dibujar();
 			}
+
+			var circulo1 = new Circle(300,300,300,'#cf1404');
 
 
 			 circulo1.dibujar();
-			 circulo2.dibujar();
-			 circulo3.dibujar();
-			 circulo4.dibujar();
+
 
 			 function getMousePos(canvas, evt) {
         var rect = canvas.getBoundingClientRect();
@@ -74,23 +67,22 @@
           y: evt.clientY - rect.top
         };
       }
-			function haceClick(){
-				canvas.addEventListener('click', function(evt) {
 
-				  var mousePos = getMousePos(canvas, evt);
-	        var circuloclick = new Circle(mousePos.x,mousePos.y,80,'#241404');
-					circuloclick.dibujar();
-	      }, false);
-			}
-			//haceClick();
 
-			function arrastrar(){
-				canvas.addEventListener('mousemove', function(evt) {
-        var mousePos = getMousePos(canvas, evt);
-				var circuloclick = new Circle(mousePos.x,mousePos.y,80,'#24ff04');
-				circuloclick.dibujar();
-      }, false);
-			}
-			//arrastrar();
+		 function agregaimagen(){
+			 canvas.addEventListener('click', function(evt) {
+				 var img = new Image();
+				 img.src = 'cara.png';
+				 img.onload = function(){
+				 img.width = circulo1.radio * 2;
+				 img.height = circulo1.radio * 2;
+				 //ctx.drawImage(img, 0, 0, img.width,img.height );
+	 				var image = ctx.createPattern(img,"no-repeat");
+	 				circulo1.setimage(image);
+	 			}
+			 }, false);
+		 }
+		 agregaimagen();
+
 	</script>
 </html>
