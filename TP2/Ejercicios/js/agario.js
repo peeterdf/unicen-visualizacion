@@ -55,13 +55,7 @@ canvas.onmouseup = function(evt){
    circulos[0].setY(mousePos.y+circulos[0].sely);
    for(let i=0; i<semillas.length;i++){
      if(semillas[i].superpone(circulos[0]) && semillas[i].comido==0){
-       if(semillas[i].color!='#000000'){
-         circulos[0].radio+=semillas[i].radio;
-         semillas[i].comido=1;
-        }else{
-          circulos[0].radio-=semillas[i].radio;
-          semillas[i].comido=1;
-        }
+       circulos[0].comer(semillas[i]);
      }
    }
  }

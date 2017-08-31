@@ -80,3 +80,14 @@ Circle.prototype.superpone = function(c){
   }
   return result;
 }
+
+
+Circle.prototype.comer = function(s){
+  if(s.color!='#000000'){
+    this.radio+=s.radio;
+    s.comido=1;
+   }else{
+     this.radio-=s.radio;
+     s.comido=1;
+   }
+}
