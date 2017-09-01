@@ -102,6 +102,39 @@
 				for(let i=0; i<circulos.length;i++){
 						circulos[i].dibujar(ctx);
 				}
-      };
+      }
+
+
+
+	 	 window.onkeydown=function(e){
+
+		 //arr
+		 if (e.keyCode == 38) {
+			 circulos[0].posY-=4;
+			 ctx.clearRect(0,0,canvas.width,canvas.height);
+			 circulos[0].dibujar(ctx);
+		 }
+		 //abajo
+		 if (e.keyCode == 40) {
+			 circulos[0].posY+=4;
+			 ctx.clearRect(0,0,canvas.width,canvas.height);
+			 circulos[0].dibujar(ctx);
+		 }
+		//izq
+		 if (e.keyCode == 37) {
+			 circulos[0].posX-=4;
+			 ctx.clearRect(0,0,canvas.width,canvas.height);
+			 circulos[0].dibujar(ctx);
+		 }
+		//der
+		 if (e.keyCode == 39) {
+			 circulos[0].posX+=4;
+			 ctx.clearRect(0,0,canvas.width,canvas.height);
+			 circulos[0].dibujar(ctx);
+		 }
+	 }
+
+
+
 	</script>
 </html>
