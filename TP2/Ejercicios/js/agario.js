@@ -33,6 +33,7 @@ function getMousePos(canvas, evt) {
 }
 
 canvas.onmousedown = function(evt){
+
  var mousePos = getMousePos(canvas, evt);
 
    var isAdentro = circulos[0].estaAdentro(mousePos.x,mousePos.y);
@@ -48,6 +49,7 @@ canvas.onmouseup = function(evt){
 
 
  canvas.onmousemove = function(evt) {
+
  var mousePos = getMousePos(canvas, evt);
 
  if(circulos[0].selected==1){
@@ -58,16 +60,17 @@ canvas.onmouseup = function(evt){
        circulos[0].comer(semillas[i]);
      }
    }
+
  }
    ctx.clearRect(0,0,canvas.width,canvas.height);
    circulos[0].dibujar(ctx);
    for(let i=0; i<semillas.length;i++){
      semillas[i].dibujar(ctx);
    }
+   reloj1.dibujaReloj();
 };
 
 function newSemillas(){
-   console.log('hola!');
    var x = Math.floor(Math.random()* canvas.width);
    var y = Math.floor(Math.random()* canvas.height);
    var radio = 10;
@@ -79,9 +82,45 @@ function newSemillas(){
 function randomColor(){
  //var color = '#'+Math.floor(Math.random()*16777215).toString(16);
  var color = '#'; // hexadecimal starting symbol
- var letters = ['000000','FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF','C0C0C0']; //Set your colors here
+ var letters = ['000000','FF0000','00FF00','0000FF'];//,'FFFF00','00FFFF','FF00FF','C0C0C0']; //Set your colors here
  color += letters[Math.floor(Math.random() * letters.length)];
  return color;
 }
 
+
+function mueveReloj(){
+  seg++;
+  if(seg==60){
+    seg=0;
+    min++;
+    if(min==60){
+      min=0;
+      hr++
+    }
+  }
+  dibujaReloj();
+}
+function dibujaReloj(){
+  ctx.beginPath();
+  ctx.fillStyle='white';
+  ctx.fillRect(0,0,160,30);
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.fillStyle='black';
+  ctx.font="20px Fixedsys";
+  var strmin=min;
+  var strseg=seg;
+  var strhr=hr;
+  if(min<10){strmin='0'+min};
+  if(seg<10){strseg='0'+seg};
+  if(hr<10){strhr='0'+hr};
+  ctx.fillText('Tiempo: '+strhr+':'+strmin+':'+strseg,10,20);
+  ctx.fill();
+  ctx.closePath();
+}
+
 setInterval(newSemillas,3000);
+var hr = min =seg=00;
+mueveReloj();
+setInterval(mueveReloj,1000);

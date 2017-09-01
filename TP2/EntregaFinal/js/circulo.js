@@ -1,3 +1,5 @@
+
+
 function Circle(){
   this.posX = 4;
   this.posy = 4;
@@ -83,9 +85,8 @@ Circle.prototype.superpone = function(c){
 
 
 Circle.prototype.comer = function(s){
-  if(s.color!=this.color){
+  if(s.color!='#000000'){
     this.radio+=s.radio;
-    this.color=s.color;
     s.comido=1;
    }else{
      this.radio-=s.radio;

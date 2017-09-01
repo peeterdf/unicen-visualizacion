@@ -1,47 +1,47 @@
-function Circle(){
+function Cuadrado(){
   this.posX = 4;
   this.posy = 4;
-  this.radio = 10;
+  this.width = 10;
+  this.height = 10;
   this.color = '#141444';
   this.selected=0;
   this.selx=0;
   this.sely=0;
-  this.comido=0;
+  this.pieza=0;
 }
 
-function Circle(paramPosX, paramPosY, paramRadio, paramColor){
+function Cuadrado(paramPosX, paramPosY, paramWidht, paramHeight,paramColor,paramPieza){
   this.posX = paramPosX;
   this.posY = paramPosY;
-  this.radio = paramRadio;
+  this.width = paramWidht;
+  this.height = paramHeight;
   this.color = paramColor;
   this.selected=0;
   this.selx=0;
   this.sely=0;
-  this.comido=0;
+  this.pieza=paramPieza;
 }
 
-Circle.prototype.setX = function(x) {
+Cuadrado.prototype.setX = function(x) {
   this.posX = x;
 }
 
-Circle.prototype.setY = function(y) {
+Cuadrado.prototype.setY = function(y) {
   this.posY = y;
 }
 
-Circle.prototype.getX = function() {
+Cuadrado.prototype.getX = function() {
   return this.posX ;
 }
 
-Circle.prototype.getY = function() {
+Cuadrado.prototype.getY = function() {
   return this.posY;
 }
 
 
-Circle.prototype.message = function(){
-  alert('soy circulito con radio:'+this.radio);
-}
 
-Circle.prototype.dibujar = function(ctx){
+
+Cuadrado.prototype.dibujar = function(ctx){
   if(this.comido==0){
     ctx.beginPath();
     ctx.fillStyle = this.color;
@@ -51,7 +51,7 @@ Circle.prototype.dibujar = function(ctx){
   }
 }
 
-Circle.prototype.estaAdentro = function(x,y){
+Cuadrado.prototype.estaAdentro = function(x,y){
   var result = false;
   var cuenta = Math.sqrt(Math.pow(x-this.posX,2) + Math.pow(y-this.posY,2));
   if (cuenta<this.radio){
@@ -60,19 +60,19 @@ Circle.prototype.estaAdentro = function(x,y){
   return result;
 }
 
-Circle.prototype.select = function(x,y){
+Cuadrado.prototype.select = function(x,y){
   this.selected=1;
   this.selx=x;
   this.sely=y;
 }
 
-Circle.prototype.unselect = function(){
+Cuadrado.prototype.unselect = function(){
   this.selected=0;
   this.selx=0;
   this.sely=0;
 }
 
-Circle.prototype.superpone = function(c){
+Cuadrado.prototype.superpone = function(c){
   var result = false;
   var cuenta = Math.sqrt(Math.pow(c.posX-this.posX,2) + Math.pow(c.posY-this.posY,2));
   if (cuenta+this.radio<c.radio){
@@ -82,10 +82,9 @@ Circle.prototype.superpone = function(c){
 }
 
 
-Circle.prototype.comer = function(s){
-  if(s.color!=this.color){
+Cuadrado.prototype.comer = function(s){
+  if(s.color!='#000000'){
     this.radio+=s.radio;
-    this.color=s.color;
     s.comido=1;
    }else{
      this.radio-=s.radio;
