@@ -61,13 +61,15 @@ canvas.onmouseup = function(evt){
      }
    }
 
- }
+
    ctx.clearRect(0,0,canvas.width,canvas.height);
+   dibujaReloj();
    circulos[0].dibujar(ctx);
    for(let i=0; i<semillas.length;i++){
      semillas[i].dibujar(ctx);
    }
-   reloj1.dibujaReloj();
+
+   }
 };
 
 function newSemillas(){
