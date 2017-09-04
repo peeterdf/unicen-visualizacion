@@ -4,6 +4,7 @@ function Reloj(){
   this.min=0;
   this.seg=0;
   this.ctx=ctx;
+  this.self = this;
 };
 
  Reloj.prototype.dibujaReloj=function(){
@@ -33,14 +34,8 @@ function Reloj(){
       this.min++;
       if(this.min==60){
         this.min=0;
-        this.hr++
+        this.hr++;
       }
     }
     this.dibujaReloj();
   }
-
-
-
-var reloj1= new Reloj(ctx);
-reloj1.dibujaReloj();
-setInterval("reloj1.mueveReloj()",1000);

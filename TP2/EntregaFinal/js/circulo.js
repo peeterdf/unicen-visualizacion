@@ -5,21 +5,22 @@ function Circle(){
   this.posy = 4;
   this.radio = 10;
   this.color = '#141444';
+  this.colorBorde = '#141444';
   this.selected=0;
   this.selx=0;
   this.sely=0;
   this.comido=0;
 }
 
-function Circle(paramPosX, paramPosY, paramRadio, paramColor){
+function Circle(paramPosX, paramPosY, paramRadio, paramColor,paramColorBorde){
   this.posX = paramPosX;
   this.posY = paramPosY;
   this.radio = paramRadio;
   this.color = paramColor;
+  this.colorBorde = paramColorBorde;
   this.selected=0;
   this.selx=0;
   this.sely=0;
-  this.comido=0;
 }
 
 Circle.prototype.setX = function(x) {
@@ -44,13 +45,20 @@ Circle.prototype.message = function(){
 }
 
 Circle.prototype.dibujar = function(ctx){
-  if(this.comido==0){
+
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.arc(this.posX,this.posY,this.radio,0,Math.PI * 2);
     ctx.fill();
     ctx.closePath();
-  }
+    ctx.beginPath();
+    ctx.arc(this.posX,this.posY,this.radio,0,Math.PI * 2);
+    ctx.lineWidth =7;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = this.colorBorde;
+    ctx.stroke();
+    ctx.closePath();
+
 }
 
 Circle.prototype.estaAdentro = function(x,y){
@@ -69,10 +77,14 @@ Circle.prototype.select = function(x,y){
 }
 
 Circle.prototype.unselect = function(){
+  if(this.selected==1){
   this.selected=0;
+  }
   this.selx=0;
   this.sely=0;
 }
+
+
 
 Circle.prototype.superpone = function(c){
   var result = false;
