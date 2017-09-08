@@ -12,3 +12,7 @@ body{
 .juego{
   align-items: center;
 }
+#canvas{
+  background-color: white;
+  border-radius: 10px;
+}

@@ -39,3 +39,13 @@ function Reloj(){
     }
     this.dibujaReloj();
   }
+
+  Reloj.prototype.getEstadoReloj=function(){
+    var strmin=this.min;
+    var strseg=this.seg;
+    var strhr=this.hr;
+    if(this.min<10){strmin='0'+this.min};
+    if(this.seg<10){strseg='0'+this.seg};
+    if(this.hr<10){strhr='0'+this.hr};
+    return strhr+':'+strmin+':'+strseg;
+  }

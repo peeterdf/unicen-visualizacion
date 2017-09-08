@@ -47,7 +47,9 @@ Circle.prototype.message = function(){
 Circle.prototype.dibujar = function(ctx){
 
     ctx.beginPath();
+
     ctx.fillStyle = this.color;
+    ctx.drawImage(img2,this.posX-this.radio,this.posY-this.radio);
     ctx.arc(this.posX,this.posY,this.radio,0,Math.PI * 2);
     ctx.fill();
     ctx.closePath();
@@ -84,8 +86,6 @@ Circle.prototype.unselect = function(){
   this.sely=0;
 }
 
-
-
 Circle.prototype.superpone = function(c){
   var result = false;
   var cuenta = Math.sqrt(Math.pow(c.posX-this.posX,2) + Math.pow(c.posY-this.posY,2));
@@ -93,15 +93,4 @@ Circle.prototype.superpone = function(c){
     result = true;
   }
   return result;
-}
-
-
-Circle.prototype.comer = function(s){
-  if(s.color!='#000000'){
-    this.radio+=s.radio;
-    s.comido=1;
-   }else{
-     this.radio-=s.radio;
-     s.comido=1;
-   }
 }
