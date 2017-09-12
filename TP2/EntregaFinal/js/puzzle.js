@@ -6,18 +6,41 @@ function Puzzle(){
   this.dificultad=1;
   this.piezas=[];
   this.encastres=[];
-  this.figuras=['Circle','Circle','Cuadrado'];
+  this.figuras=['Triangulo','Circle','Cuadrado'];
   this.andando=0;
   //this.reloj= new Reloj(ctx);
 
 
 }
-Puzzle.prototype.isfinish = function(m){
-  alert(m);
+Puzzle.prototype.isfinish = function(){
+  clearInterval(relojInterval);
+  reloj1.dibujaReloj();
+  ctx.fillStyle= 'rgba(92, 88, 103, 0.77)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.beginPath();
+  ctx.fillStyle='white';
+  ctx.fillRect(300,180,300,100);
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.fillStyle='black';
+  ctx.font="20px Fixedsys";
+  var str1="Juego Terminado"
+  var str2="Tiempo: "+reloj1.getEstadoReloj();
+  ctx.fillText(str1,390,210);
+  ctx.fillText(str2,380,230);
+  ctx.fill();
+  ctx.closePath();
+
 }
 
 Puzzle.prototype.play=function(){
   this.andando=1;
+  var level=document.getElementById("level").value;
+  puzzle1.setDificultad(level);
   // this.reloj.dibujaReloj();
   // setInterval(this.reloj1.mueveReloj,1000);
 }//play
@@ -50,6 +73,11 @@ Puzzle.prototype.aleatorias=function(){
   figura[0] =  new Cuadrado(100,150,100,'transparent','transparent');
   figura[1] =  new Cuadrado(100,350,100,'#000000','#FF0000');
   }
+
+  if (azar=='Triangulo'){
+  figura[0] =  new Triangulo(100,150,100,'#000000','transparent');
+  figura[1] =  new Triangulo(100,350,100,'#000000','#FF0000');
+  }
   return figura;
 }
 
@@ -71,39 +99,11 @@ Puzzle.prototype.emboco=function(i){
 }
 Puzzle.prototype.termino=function(){
   for(let i=0; i<this.piezas.length;i++){
-    if( this.piezas[i].selected!=2 ) return false;
+    if( this.piezas[i].selected!=2 ){return false;}
   }
-  clearInterval(relojInterval);
-  reloj1.dibujaReloj();
-  alert("Juego Terminado\nTiempo: "+reloj1.getEstadoReloj());
+  puzzle1.isfinish();
 }
 
-var puzzle1 = new Puzzle();
-var reloj1= new Reloj(ctx);
-//on click ->
-
-reloj1.dibujaReloj();
-var relojInterval = setInterval("reloj1.mueveReloj()",1000);
-var img = new Image();
-img.src='images/marvel.jpg';
-
-var img2 = new Image();
-img2.src='images/america3.png';
-var image2 = ctx.createPattern(img2,"no-repeat");
-var image;
-img.onload=function(){
-
-  img.width= 150;
-  img.height= 150;
-  image = ctx.createPattern(img,"no-repeat");
-puzzle1.setDificultad(5);
-puzzle1.play();
-}
-function play(){
-  
-}
-
-//
 function getMousePos(canvas, evt) {
  var rect = canvas.getBoundingClientRect();
  return {
@@ -126,11 +126,46 @@ canvas.onmousedown = function(evt){
   }
 }
 
+////////////////////////////////
+
+var puzzle1 = new Puzzle();
+var reloj1= new Reloj(ctx);
+//on click ->
+
+
+
+  var img = new Image();
+  img.src='images/marvel.jpg';
+  var img2 = new Image();
+  img2.src='images/america3.png';
+  var image2 = ctx.createPattern(img2,"no-repeat");
+  var image;
+  var relojInterval;
+
+
+
+  function play(){
+    reloj1.dibujaReloj();
+    relojInterval = setInterval("reloj1.mueveReloj()",1000);
+  puzzle1.play();
+
+    img.onload=function(){
+    //  img.width= 150;
+    //  img.height= 150;
+      image = ctx.createPattern(img,"no-repeat");
+
+
+  }
+}
+////////////////////////////////
+
+
+
+
 canvas.onmouseup = function(evt){
 if (puzzle1.andando==1) {
   for (var i = 0; i < puzzle1.piezas.length; i++) {
       if (puzzle1.piezas[i].selected==1 && puzzle1.emboco(i)){
-        debugger;
         puzzle1.piezas[i].selected=2;
         puzzle1.piezas[i].posX=puzzle1.encastres[i].posX;
         puzzle1.piezas[i].posY=puzzle1.encastres[i].posY;

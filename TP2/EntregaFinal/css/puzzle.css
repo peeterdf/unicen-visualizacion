@@ -1,18 +1,36 @@
 body{
-  //background-image: url("../images/nubes.jpg");
+  background-image: url("../../../../../wp2.jpg");
   background-color: rgb(30, 128, 115);
-  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-size:cover;
 }
 
 .menu{
   height: 50px;
-  border-bottom:  4px solid rgb(209, 90, 64);
+  //border-bottom:  4px solid rgb(209, 90, 64);
 }
 
 .juego{
+
+  padding-left: 70px;
   align-items: center;
 }
+
+.lateral{
+
+  margin-left: -30px;
+  height: 550px;
+  opacity: 0.7;
+  background-color: grey;
+  border-radius: 10px;
+}
+
 #canvas{
-  background-color: white;
+  background-color: rgba(33, 29, 43, 0.89);
+//  background-image: url("../../../../../wp1.jpg");
+  background-size: contain;
+  background-position: center;
+//  opacity: 0.7;
+  background-repeat: no-repeat;
   border-radius: 10px;
 }
