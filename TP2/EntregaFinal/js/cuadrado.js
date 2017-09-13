@@ -24,11 +24,11 @@ function Cuadrado(paramPosX, paramPosY, paramLado,paramColor,paramColorBorde){
 
 
 Cuadrado.prototype.setX = function(x) {
-  this.posX = x;
+  this.posX = x-this.lado/2;
 }
 
 Cuadrado.prototype.setY = function(y) {
-  this.posY = y;
+  this.posY = y-this.lado/2;
 }
 
 Cuadrado.prototype.getX = function() {
@@ -72,8 +72,8 @@ Cuadrado.prototype.estaAdentro = function(x,y){
 
 Cuadrado.prototype.select = function(x,y){
   this.selected=1;
-  this.selx=x;
-  this.sely=y;
+  this.selx=x+this.lado/2;
+  this.sely=y+this.lado/2;
 }
 
 Cuadrado.prototype.unselect = function(){

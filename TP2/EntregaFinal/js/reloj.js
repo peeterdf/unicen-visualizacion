@@ -49,3 +49,9 @@ function Reloj(){
     if(this.hr<10){strhr='0'+this.hr};
     return strhr+':'+strmin+':'+strseg;
   }
+
+  Reloj.prototype.resetReloj=function(){
+    this.hr=0;
+    this.min=0;
+    this.seg=0;
+  }

@@ -28,7 +28,7 @@ Triangulo.prototype.setX = function(x) {
 }
 
 Triangulo.prototype.setY = function(y) {
-  this.posY = y;
+  this.posY = y-this.lado/2;
 }
 
 Triangulo.prototype.getX = function() {
@@ -100,7 +100,7 @@ Triangulo.prototype.estaAdentro = function(x,y){
 Triangulo.prototype.select = function(x,y){
   this.selected=1;
   this.selx=x;
-  this.sely=y;
+  this.sely=y+this.lado/2;
 }
 
 Triangulo.prototype.unselect = function(){

@@ -14,33 +14,26 @@ function Puzzle(){
 }
 Puzzle.prototype.isfinish = function(){
   clearInterval(relojInterval);
-  //reloj1.dibujaReloj();
   ctx.beginPath();
   ctx.fillStyle= 'rgba(92, 88, 103, 0.67)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fill();
   ctx.closePath();
-  //ctx.beginPath();
-  //ctx.fillStyle='white';
-  //ctx.fillRect(300,180,300,100);
-  //ctx.fill();
-  //ctx.closePath();
   ctx.beginPath();
   ctx.fillStyle='black';
   ctx.font="40px Fixedsys";
   var str1="Juego Terminado!"
   var str2="Tiempo: "+reloj1.getEstadoReloj();
-  ctx.fillText(str1,330,210);
-  ctx.fillText(str2,330,260);
+  ctx.fillText(str1,150,210);
+  ctx.fillText(str2,150,260);
   ctx.fill();
   ctx.closePath();
   puzzle1.andando=3;
+  reloj1.resetReloj();
 
 }
 
 Puzzle.prototype.play=function(){
-  this.andando=1;
-  var level=document.getElementById("level").value;
   puzzle1.setDificultad(level);
   // this.reloj.dibujaReloj();
   // setInterval(this.reloj1.mueveReloj,1000);
@@ -51,11 +44,58 @@ Puzzle.prototype.pause=function(){
 }
 Puzzle.prototype.setDificultad=function(l){
 this.dificultad=l;
+var x1=[150,300,450];
+var x2=[620,770,920];
+var y=[100,250,400];
 
 for (var i = 0; i < l; i++) {
     var piezanueva = this.aleatorias();
-    piezanueva[0].setX(100+120*i);
-    piezanueva[1].setX(100+120*i);
+    if(i<3){
+      piezanueva[0].setY(y[0]);
+      piezanueva[1].setY(y[0]);
+      if (i==1){
+        piezanueva[0].setX(x1[1]);
+        piezanueva[1].setX(x2[1]);
+      }else if (i==2){
+        piezanueva[0].setX(x1[2]);
+        piezanueva[1].setX(x2[2]);
+      }else{
+        piezanueva[0].setX(x1[0]);
+        piezanueva[1].setX(x2[0]);
+      }
+    }else if(i<6){
+      piezanueva[0].setY(y[1]);
+      piezanueva[1].setY(y[1]);
+      if (i==4){
+        piezanueva[0].setX(x1[1]);
+        piezanueva[1].setX(x2[1]);
+      }else if (i==3){
+        piezanueva[0].setX(x1[2]);
+        piezanueva[1].setX(x2[2]);
+      }else{
+        piezanueva[0].setX(x1[0]);
+        piezanueva[1].setX(x2[0]);
+      }
+    }else{
+      piezanueva[0].setY(y[2]);
+      piezanueva[1].setY(y[2]);
+      if (i==8){
+        piezanueva[0].setX(x1[1]);
+        piezanueva[1].setX(x2[1]);
+      }else if (i==6){
+        piezanueva[0].setX(x1[2]);
+        piezanueva[1].setX(x2[2]);
+      }else{
+        piezanueva[0].setX(x1[0]);
+        piezanueva[1].setX(x2[0]);
+      }
+    }
+
+
+
+
+
+
     this.piezas[i]=piezanueva[0];
     this.encastres[i]=piezanueva[1];
 }
@@ -131,82 +171,104 @@ canvas.onmousedown = function(evt){
   }
   if(puzzle1.andando==0){
       var mousePos = getMousePos(canvas, evt);
-      if ( mousePos.x-380<=150 && mousePos.x-380>0){
+      if ( mousePos.x-480<=150 && mousePos.x-480>0){
         if(mousePos.y-220<=50 &&  mousePos.y-220>0){
           ctx.clearRect(0,0,canvas.width,canvas.height);
           selectLevel();
-          play();//hacer
+          return false;
         }
       }
   }
   if(puzzle1.andando==2){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    play();
+    var mousePos = getMousePos(canvas, evt);
+    if ( mousePos.x-320<=150 && mousePos.x-320>0){
+      if(mousePos.y-220<=50 &&  mousePos.y-220>0){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        level=3;
+        play();
+      }
+    }
+    if ( mousePos.x-470<=150 && mousePos.x-470>0){
+      if(mousePos.y-220<=50 &&  mousePos.y-220>0){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        level=6;
+        play();
+      }
+    }
+    if ( mousePos.x-620<=150 && mousePos.x-620>0){
+      if(mousePos.y-220<=50 &&  mousePos.y-220>0){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        level=9;
+        play();
+      }
+    }
+
   }
   if(puzzle1.andando==3){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    puzzle1.andando=0;
     comienzo();
   }
 }
 
 function selectLevel(){
+  puzzle1.andando=2;
   ctx.beginPath();
   ctx.fillStyle= 'rgba(92, 88, 103, 0.67)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fill();
   ctx.closePath();
   ctx.beginPath();
-  ctx.fillStyle='white';
-  ctx.fillRect(220,320,450,50);
+  ctx.fillStyle='rgb(128, 136, 138)';
+  ctx.fillRect(320,220,450,50);
   ctx.fill();
   ctx.closePath();
   ctx.beginPath();
   ctx.lineWidth =5;
   ctx.strokeStyle = 'rgb(19, 21, 79)' ;
-  ctx.strokeRect(220,320,150,50);
+  ctx.strokeRect(320,220,150,50);
   ctx.closePath();
   ctx.beginPath();
   ctx.lineWidth =5;
   ctx.strokeStyle = 'rgb(19, 21, 79)' ;
-  ctx.strokeRect(370,320,150,50);
+  ctx.strokeRect(470,220,150,50);
   ctx.closePath();
   ctx.beginPath();
   ctx.lineWidth =5;
   ctx.strokeStyle = 'rgb(19, 21, 79)' ;
-  ctx.strokeRect(520,320,150,50);
+  ctx.strokeRect(620,220,150,50);
   ctx.closePath();
   ctx.beginPath();
   ctx.fillStyle='black';
   ctx.font="40px Fixedsys";
-  ctx.fillText("Facil",250,358);
-  ctx.fillText("Medio",400,358);
-  ctx.fillText("Dificil",550,358);
+  ctx.fillText("Facil",350,258);
+  ctx.fillText("Medio",500,258);
+  ctx.fillText("Dificil",650,258);
   ctx.fill();
   ctx.closePath();
 
 }
 function comienzo(){
+  puzzle1.andando=0;
   ctx.beginPath();
   ctx.fillStyle= 'rgba(92, 88, 103, 0.67)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fill();
   ctx.closePath();
   ctx.beginPath();
-  ctx.fillStyle='white';
-  ctx.fillRect(380,220,150,50);
+  ctx.fillStyle='rgb(128, 136, 138)';
+  ctx.fillRect(480,220,150,50);
   ctx.fill();
   ctx.closePath();
   ctx.beginPath();
   ctx.lineWidth =5;
   ctx.strokeStyle = 'rgb(19, 21, 79)' ;
-  ctx.strokeRect(380,220,150,50);
+  ctx.strokeRect(480,220,150,50);
   ctx.closePath();
   ctx.beginPath();
   ctx.fillStyle='black';
   ctx.font="40px Fixedsys";
   var str1="Play!"
-  ctx.fillText(str1,415,258);
+  ctx.fillText(str1,515,258);
   ctx.fill();
   ctx.closePath();
 
@@ -216,7 +278,7 @@ function comienzo(){
 var puzzle1 = new Puzzle();
 var reloj1= new Reloj(ctx);
 //on click ->
-
+var level;
   var img = new Image();
   img.src='images/thor.png';
   var img2 = new Image();
@@ -228,16 +290,12 @@ var reloj1= new Reloj(ctx);
   var relojInterval;
   comienzo();
   function play(){
+    puzzle1.andando=1;
     reloj1.dibujaReloj();
     relojInterval = setInterval("reloj1.mueveReloj()",1000);
   puzzle1.play();
-
     img.onload=function(){
-    //  img.width= 150;
-    //  img.height= 150;
       image = ctx.createPattern(img,"no-repeat");
-
-
   }
 }
 
