@@ -348,7 +348,7 @@ if (puzzle1.andando==1) {
        for(let i=0; i<puzzle1.piezas.length;i++){
          puzzle1.piezas[i].dibujar(ctx);
        }
-
+       puzzle1.piezas[i].dibujar(ctx);
        }
     }
   }
