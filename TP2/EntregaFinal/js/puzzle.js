@@ -14,26 +14,27 @@ function Puzzle(){
 }
 Puzzle.prototype.isfinish = function(){
   clearInterval(relojInterval);
-  reloj1.dibujaReloj();
-  ctx.fillStyle= 'rgba(92, 88, 103, 0.77)';
+  //reloj1.dibujaReloj();
+  ctx.beginPath();
+  ctx.fillStyle= 'rgba(92, 88, 103, 0.67)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fill();
   ctx.closePath();
-  ctx.beginPath();
-  ctx.beginPath();
-  ctx.fillStyle='white';
-  ctx.fillRect(300,180,300,100);
-  ctx.fill();
-  ctx.closePath();
+  //ctx.beginPath();
+  //ctx.fillStyle='white';
+  //ctx.fillRect(300,180,300,100);
+  //ctx.fill();
+  //ctx.closePath();
   ctx.beginPath();
   ctx.fillStyle='black';
-  ctx.font="20px Fixedsys";
-  var str1="Juego Terminado"
+  ctx.font="40px Fixedsys";
+  var str1="Juego Terminado!"
   var str2="Tiempo: "+reloj1.getEstadoReloj();
-  ctx.fillText(str1,390,210);
-  ctx.fillText(str2,380,230);
+  ctx.fillText(str1,330,210);
+  ctx.fillText(str2,330,260);
   ctx.fill();
   ctx.closePath();
+  puzzle1.andando=3;
 
 }
 
@@ -75,24 +76,28 @@ Puzzle.prototype.aleatorias=function(){
   }
 
   if (azar=='Triangulo'){
-  figura[0] =  new Triangulo(100,150,100,'#000000','transparent');
-  figura[1] =  new Triangulo(100,350,100,'#000000','#FF0000');
+  figura[0] =  new Triangulo(100,150,150,'transparent','transparent');
+  figura[1] =  new Triangulo(100,350,150,'#000000','#FF0000');
   }
   return figura;
 }
 
 Puzzle.prototype.dibujarTablero=function(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let i=0; i<this.piezas.length;i++){
+  for(let i=0; i<this.encastres.length;i++){
     this.encastres[i].dibujar(ctx);
+  }
+  for(let i=0; i<this.piezas.length;i++){
     this.piezas[i].dibujar(ctx);
   }
 }
 
-Puzzle.prototype.emboco=function(i){
-  if(-10 < puzzle1.piezas[i].posX- puzzle1.encastres[i].posX && puzzle1.piezas[i].posX- puzzle1.encastres[i].posX< 10 ){
-    if(-10 < puzzle1.piezas[i].posY- puzzle1.encastres[i].posY  && puzzle1.piezas[i].posY- puzzle1.encastres[i].posY < 10 ){
-      return true;
+Puzzle.prototype.emboco=function(i,j){
+    if(puzzle1.piezas[i].tipo==puzzle1.encastres[j].tipo && puzzle1.encastres[j].selected==0){
+      if(-10 < puzzle1.piezas[i].posX- puzzle1.encastres[j].posX && puzzle1.piezas[i].posX- puzzle1.encastres[j].posX< 10 ){
+        if(-10 < puzzle1.piezas[i].posY- puzzle1.encastres[j].posY  && puzzle1.piezas[i].posY- puzzle1.encastres[j].posY < 10 ){
+          return true;
+        }
     }
   }
   return false;
@@ -102,6 +107,7 @@ Puzzle.prototype.termino=function(){
     if( this.piezas[i].selected!=2 ){return false;}
   }
   puzzle1.isfinish();
+  return true;
 }
 
 function getMousePos(canvas, evt) {
@@ -114,7 +120,6 @@ function getMousePos(canvas, evt) {
 
 canvas.onmousedown = function(evt){
   if (puzzle1.andando==1) {
-
     var mousePos = getMousePos(canvas, evt);
     for (var i = 0; i < puzzle1.piezas.length; i++) {
       var isAdentro = puzzle1.piezas[i].estaAdentro(mousePos.x,mousePos.y);
@@ -124,26 +129,104 @@ canvas.onmousedown = function(evt){
       }
     }
   }
+  if(puzzle1.andando==0){
+      var mousePos = getMousePos(canvas, evt);
+      if ( mousePos.x-380<=150 && mousePos.x-380>0){
+        if(mousePos.y-220<=50 &&  mousePos.y-220>0){
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+          selectLevel();
+          play();//hacer
+        }
+      }
+  }
+  if(puzzle1.andando==2){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    play();
+  }
+  if(puzzle1.andando==3){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    puzzle1.andando=0;
+    comienzo();
+  }
 }
 
+function selectLevel(){
+  ctx.beginPath();
+  ctx.fillStyle= 'rgba(92, 88, 103, 0.67)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.fillStyle='white';
+  ctx.fillRect(220,320,450,50);
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.lineWidth =5;
+  ctx.strokeStyle = 'rgb(19, 21, 79)' ;
+  ctx.strokeRect(220,320,150,50);
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.lineWidth =5;
+  ctx.strokeStyle = 'rgb(19, 21, 79)' ;
+  ctx.strokeRect(370,320,150,50);
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.lineWidth =5;
+  ctx.strokeStyle = 'rgb(19, 21, 79)' ;
+  ctx.strokeRect(520,320,150,50);
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.fillStyle='black';
+  ctx.font="40px Fixedsys";
+  ctx.fillText("Facil",250,358);
+  ctx.fillText("Medio",400,358);
+  ctx.fillText("Dificil",550,358);
+  ctx.fill();
+  ctx.closePath();
+
+}
+function comienzo(){
+  ctx.beginPath();
+  ctx.fillStyle= 'rgba(92, 88, 103, 0.67)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.fillStyle='white';
+  ctx.fillRect(380,220,150,50);
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.lineWidth =5;
+  ctx.strokeStyle = 'rgb(19, 21, 79)' ;
+  ctx.strokeRect(380,220,150,50);
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.fillStyle='black';
+  ctx.font="40px Fixedsys";
+  var str1="Play!"
+  ctx.fillText(str1,415,258);
+  ctx.fill();
+  ctx.closePath();
+
+}
 ////////////////////////////////
 
 var puzzle1 = new Puzzle();
 var reloj1= new Reloj(ctx);
 //on click ->
 
-
-
   var img = new Image();
-  img.src='images/marvel.jpg';
+  img.src='images/thor.png';
   var img2 = new Image();
-  img2.src='images/america3.png';
+  img2.src='images/america4.png';
   var image2 = ctx.createPattern(img2,"no-repeat");
+  var img3 = new Image();
+  img3.src='images/t4.png';
   var image;
   var relojInterval;
-
-
-
+  comienzo();
   function play(){
     reloj1.dibujaReloj();
     relojInterval = setInterval("reloj1.mueveReloj()",1000);
@@ -157,6 +240,8 @@ var reloj1= new Reloj(ctx);
 
   }
 }
+
+
 ////////////////////////////////
 
 
@@ -165,17 +250,22 @@ var reloj1= new Reloj(ctx);
 canvas.onmouseup = function(evt){
 if (puzzle1.andando==1) {
   for (var i = 0; i < puzzle1.piezas.length; i++) {
-      if (puzzle1.piezas[i].selected==1 && puzzle1.emboco(i)){
+    for(let j=0; j<puzzle1.encastres.length;j++){
+      if (puzzle1.piezas[i].selected==1 && puzzle1.emboco(i,j)){
+        puzzle1.encastres[j].selected=1;
         puzzle1.piezas[i].selected=2;
-        puzzle1.piezas[i].posX=puzzle1.encastres[i].posX;
-        puzzle1.piezas[i].posY=puzzle1.encastres[i].posY;
+        puzzle1.piezas[i].posX=puzzle1.encastres[j].posX;
+        puzzle1.piezas[i].posY=puzzle1.encastres[j].posY;
         puzzle1.dibujarTablero();
-        reloj1.dibujaReloj();
-        puzzle1.termino();
-      }else{
-      puzzle1.piezas[i].unselect();
+        if (!puzzle1.termino()){
+          reloj1.dibujaReloj();
+        }
       }
+    }
   }
+for (var i = 0; i < puzzle1.piezas.length; i++) {
+  puzzle1.piezas[i].unselect();
+}
 }
 }
 

@@ -16,14 +16,6 @@ body{
   align-items: center;
 }
 
-.lateral{
-
-  margin-left: -30px;
-  height: 550px;
-  opacity: 0.7;
-  background-color: grey;
-  border-radius: 10px;
-}
 
 #canvas{
   background-color: rgba(33, 29, 43, 0.89);

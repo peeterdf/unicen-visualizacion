@@ -10,6 +10,7 @@ function Circle(){
   this.selx=0;
   this.sely=0;
   this.comido=0;
+  this.tipo=1;
 }
 
 function Circle(paramPosX, paramPosY, paramRadio, paramColor,paramColorBorde){
@@ -21,6 +22,7 @@ function Circle(paramPosX, paramPosY, paramRadio, paramColor,paramColorBorde){
   this.selected=0;
   this.selx=0;
   this.sely=0;
+  this.tipo=1;
 }
 
 Circle.prototype.setX = function(x) {

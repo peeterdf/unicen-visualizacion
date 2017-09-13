@@ -7,6 +7,7 @@ function Cuadrado(){
   this.selected=0;
   this.selx=0;
   this.sely=0;
+  this.tipo=2;
 }
 
 function Cuadrado(paramPosX, paramPosY, paramLado,paramColor,paramColorBorde){
@@ -18,6 +19,7 @@ function Cuadrado(paramPosX, paramPosY, paramLado,paramColor,paramColorBorde){
   this.selected=0;
   this.selx=0;
   this.sely=0;
+  this.tipo=2;
 }
 
 

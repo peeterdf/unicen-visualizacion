@@ -7,6 +7,7 @@ function Triangulo(){
   this.selected=0;
   this.selx=0;
   this.sely=0;
+  this.tipo=3;
 }
 
 function Triangulo(paramPosX, paramPosY, paramLado,paramColor,paramColorBorde){
@@ -18,6 +19,7 @@ function Triangulo(paramPosX, paramPosY, paramLado,paramColor,paramColorBorde){
   this.selected=0;
   this.selx=0;
   this.sely=0;
+  this.tipo=3;
 }
 
 
@@ -44,6 +46,7 @@ Triangulo.prototype.message = function(){
 
 Triangulo.prototype.dibujar = function(ctx){
     ctx.beginPath();
+    ctx.drawImage(img3,this.posX-this.lado/2,this.posY);
     ctx.fillStyle = this.color;
     ctx.moveTo(this.posX,this.posY);//75 50
     ctx.lineTo(this.posX-this.lado/2,this.posY+Math.sqrt(Math.pow(this.lado,2) - Math.pow(this.lado/2,2)));//100 75
