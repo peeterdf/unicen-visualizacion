@@ -1,0 +1,33 @@
+#reloj{
+    border-radius: 100%;
+    width: 400px;
+    height: 400px;
+    background-image: url('../reloj.jpg');
+}
+
+ul{
+    display: none;
+    list-style: none;
+}
+
+
+
+#hora{
+    position: absolute;
+    animation: avanza 216000s linear infinite;
+}
+
+#min{
+    position: absolute;
+    animation: avanza 3600s linear infinite;
+}
+
+@keyframes avanza {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+#seg{
+    position: absolute;
+    animation: avanza 60s steps(60) infinite;
+}
+

@@ -1,0 +1,21 @@
+#bichito {
+    margin-top: 330px;
+    width: 256px;
+    height: 256px;
+    background: url('../spritestrip.png') left center;
+   /*  animation: play 1s steps(6) infinite; */
+    }
+
+@keyframes play {
+  0% { background-position:  0px; }
+100% { background-position: -1536px; }
+
+} 
+
+body{
+    height: 600px;
+    background-image: url('../TileFondo.png');
+    background-repeat: repeat-x;
+    background-size: auto;
+}
+

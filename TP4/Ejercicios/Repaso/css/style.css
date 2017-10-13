@@ -1,0 +1,29 @@
+header{
+    background-color: #131313;
+}
+header a{
+    text-decoration:none; 
+    display: block;
+}
+header li{
+    list-style:none;
+    float: right;
+}
+ .top-navbar .main-navbar{
+    float: right;
+} 
+
+.logo{
+    top: 30;
+    position: relative;
+}
+.logo img{
+    width: 100px;
+    height: 100px;
+}
+header h1{
+  
+}
+.hamburger{
+    display: none;
+}
