@@ -1,0 +1,87 @@
+
+
+
+@keyframes player-walk {
+    0% { background-position:  250px 280px; }
+    100% { background-position:  -165px 280px; }
+    
+  } 
+
+  @keyframes player-run {
+    0% { background-position:  254px 140px; }
+    100% { background-position:  -161px 140px; }
+    
+  } 
+
+  @keyframes player-stop {
+    0% { background-position:  -20px 78px; }
+    100% { background-position:  120px 78px; }
+  } 
+
+@keyframes fondo {
+    0% { background-position:  0 0; }
+  100% { background-position: -1349px 0; }
+  
+  }  
+
+body{
+    height: 100%;
+    width: 100%;
+}
+
+.fondo{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+#player{
+    position: absolute;
+    margin-top: 340px;
+    margin-left: 250px;
+    width: 65px;
+    height: 70px;
+    background: url('../img/batman2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0px 0px; 
+    /* to 150 from -250*/
+    /* 943x650 */
+    z-index: 8;
+}
+
+#back8, #back7, #back6, #back5, #back4, #back3, #back2, #back1{
+    position: absolute;
+    width: 960px;
+    height: 540px;
+    background-repeat: repeat-x;
+    background-size: 100%;
+    overflow: hidden;
+    
+}
+#btn-accion{
+   
+    z-index: 10;
+}
+#fondo-inicio{
+    background: url('../img/fondo-inicio.jpg');
+    position: absolute;
+    width: 960px;
+    height: 540px;
+    background-size: 100%;
+    z-index: 9;
+}
+.btn-options{
+    width: 300px;
+    height: 30px;
+    font-size: 100%;
+}
+#btn-list{
+    padding-left: 500px;
+    padding-top: 100px;
+    position: absolute;
+    z-index: 10;
+    list-style: none;
+}
+.btn-list li{
+    margin-bottom: 10px;
+}
