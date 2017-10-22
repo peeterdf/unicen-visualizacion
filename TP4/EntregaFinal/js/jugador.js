@@ -1,3 +1,7 @@
+//0 esperando
+//1 caminar
+//2 saltar
+//9 muerto
 function Jugador(){
   this.posX = 0;
   this.posy = 0;
@@ -6,9 +10,11 @@ function Jugador(){
   this.background = '#141444';
   this.vidas=3;
   this.puntos=100;
+  this.documentElement='';
+  this.accion='0';
 }
 
-function Jugador(paramPosX, paramPosY, paramWidth,paramHeight,paramBackground,paramVidas,paramPuntos){
+function Jugador(paramPosX, paramPosY, paramWidth,paramHeight,paramBackground,paramVidas,paramPuntos,paramDE){
   this.posX = paramPosX;
   this.posy = paramPosY;
   this.width = paramWidth;
@@ -16,6 +22,7 @@ function Jugador(paramPosX, paramPosY, paramWidth,paramHeight,paramBackground,pa
   this.background = paramBackground;
   this.vidas= paramVidas;
   this.puntos= paramPuntos;
+  this.documentElement=paramDE;
 }
 
 
@@ -36,16 +43,21 @@ Jugador.prototype.getY = function() {
 }
 
 
-Jugador.prototype.caminar = function(j1){
+Jugador.prototype.caminar = function(){
+  this.accion=1;
   //document.getElementById('player')
-  j1.style.animation ='player-walk 1s steps(5) infinite';  
+  this.documentElement.style.animation ='player-run 2s steps(6) infinite'; 
 }
 
 Jugador.prototype.saltar = function(){
-  //
+  //jugador saltando se vuelve true
+  this.accion=2;
+  //setear animacion
+  this.documentElement.style.animation ='player-jump 1s steps(5) 1';
+  //animacion.addeventlistener('animationend', jugador corriendo en true setear animacion run)
 }
 
-Jugador.prototype.matar = function(){
-  //
+Jugador.prototype.morir = function(){
+  this.accion=9;
 }
 
