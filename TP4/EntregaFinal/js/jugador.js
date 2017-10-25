@@ -3,10 +3,6 @@
 //2 saltar
 //9 muerto
 function Jugador(){
-  this.posX = 0;
-  this.posy = 0;
-  this.width = 70;
-  this.height = 100;
   this.background = '#141444';
   this.vidas=3;
   this.puntos=100;
@@ -14,12 +10,7 @@ function Jugador(){
   this.accion='0';
 }
 
-function Jugador(paramPosX, paramPosY, paramWidth,paramHeight,paramBackground,paramVidas,paramPuntos,paramDE){
-  this.posX = paramPosX;
-  this.posy = paramPosY;
-  this.width = paramWidth;
-  this.height = paramHeight;
-  this.background = paramBackground;
+function Jugador(paramVidas,paramPuntos,paramDE){
   this.vidas= paramVidas;
   this.puntos= paramPuntos;
   this.documentElement=paramDE;

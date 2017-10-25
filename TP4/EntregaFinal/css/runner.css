@@ -1,9 +1,9 @@
 
 
 
-@keyframes player-walk {
-    0% { background-position:  250px 280px; }
-    100% { background-position:  -165px 280px; }
+@keyframes player-jump {
+    0% { background-position:  254px 0px; }
+    100% { background-position:  -40px 0px; }
     
   } 
 
@@ -22,11 +22,18 @@
     0% { background-position:  0 0; }
   100% { background-position: -960px 0; }
   
+  } 
+  
+  @keyframes romper-caja {
+    0% { background-position:  0 0; }
+  100% { background-position:  -420px 0; }
+  
   }  
 
 body{
     height: 100%;
     width: 100%;
+    margin: 0px;
 }
 
 .fondo{
@@ -36,8 +43,8 @@ body{
 }
 #player{
     position: absolute;
-    margin-top: 340px;
-    margin-left: 250px;
+    margin-top: 348px;
+    margin-left: 258px;
     width: 65px;
     height: 70px;
     background: url('../img/batman2.png');
@@ -102,6 +109,19 @@ audio{
     position: relative;
     z-index: 13;
 }
+#puntaje{
+    float: left;
+    height: 30px;
+    width: 200px;
+    display: block;
+    position: relative;
+    z-index: 13;
+    color: white;
+    text-transform: uppercase;
+    font-size: 30px;
+    padding: 10px;
+    display: none;
+}
 .speakerplay {
     background-position: 0 0;
   }
@@ -109,13 +129,14 @@ audio{
 #principal{
     width: 960px;
     height: 540px;
-    overflow: visible;
+    overflow: hidden;
+    align-content: center;
 }
 
 .enemigo{
     position: absolute;
     margin-top: 340px;
-    margin-left: 500px;
+    margin-left: 1000px;
     width: 60px;
     height: 60px;
     background: url('../img/box2.png');
