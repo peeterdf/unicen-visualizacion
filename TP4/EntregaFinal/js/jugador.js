@@ -7,6 +7,7 @@ function Jugador(){
   this.puntos=100;
   this.documentElement='';
   this.accion='1';
+  this.self=this;
 }
 
 function Jugador(paramVidas,paramPuntos,paramDE){
@@ -18,22 +19,19 @@ function Jugador(paramVidas,paramPuntos,paramDE){
 
 
 Jugador.prototype.correr = function(){
-  this.accion=1;
-  //document.getElementById('player')
-  this.documentElement.style.animation ='player-run 2s steps(6) infinite'; 
+  Jugador.self.accion=1;
+  console.log(this);
+  document.getElementById('player').style.animation ='player-run 2s steps(6) infinite'; 
 }
 
 Jugador.prototype.golpear = function(){
-   this.accion=2;
-   console.log("salta");
-  this.documentElement.style.animation ='player-jump 1s steps(4) 1';
-  this.documentElement.addEventListener("animationend", "this.correr()"); 
-
+  this.accion=2;
+  document.getElementById('player').addEventListener('animationend', this.correr);   
+  this.documentElement.style.animation ='player-jump 1s steps(4) 1';    
 }
 
 Jugador.prototype.morir = function(){
   this.accion=9;
   this.documentElement.style.animation ='player-die 1s steps(5) 1';
-  
 }
 

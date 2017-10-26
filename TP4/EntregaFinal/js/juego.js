@@ -3,7 +3,7 @@ function Juego(){
   this.jugador= new Jugador();
   this.enemigos=[];
   this.andando=0;
-  this.musica=0;
+  this.musica=1;
   this.opciones=[];
   this.cantEnemigos=0;
   this.actualizando=0;
@@ -15,6 +15,7 @@ Juego.prototype.setJugador = function(j) {
 }
 
 Juego.prototype.termino = function(){
+  
   document.getElementById('player').style.animation ='player-run 2s steps(6) 0';  
   document.getElementById('back6').style.animationPlayState= "paused";
   document.getElementById('back5').style.animationPlayState= "paused"; 
@@ -64,7 +65,10 @@ Juego.prototype.dibujarEscenario=function(){
   document.getElementById('fondo-inicio').style.display='none';
   document.getElementById('btn-list').style.display='none';
   document.getElementById('resultado').style.display='block';
+  document.getElementById('reproductor').style.display='block';
   this.crearEnemigos= setInterval("juego1.iniciarEnemigos()",3000);
+  document.getElementsByTagName('audio')[0].play();
+  
 }
 
 Juego.prototype.iniciarEnemigos=function(){
@@ -106,12 +110,16 @@ Juego.prototype.update=function(){
 
   /* update */
   for (var index = 0; index < this.enemigos.length; index++) {
-    var enemigo = this.enemigos[index];    
+    var enemigo = this.enemigos[index]; 
+    if(enemigo.offsetLeft<905 && enemigo.offsetLeft>895){
+      enemigo.style.backgroundPosition="0px 0px";
+    }   
     if (enemigo.offsetLeft ==1000){
       enemigo.style.marginLeft= '-100px';
     }else{
       if( 55< enemigo.offsetLeft-this.jugador.documentElement.offsetLeft && enemigo.offsetLeft-this.jugador.documentElement.offsetLeft <65){
         enemigo.style.animation ='romper-caja 1.5s steps(7) 1';
+        enemigo.style.backgroundPosition="410px 0px";
         if(this.jugador.accion==2){
           this.jugador.puntos=this.jugador.puntos+100;
         } else if(this.jugador.accion==1){
