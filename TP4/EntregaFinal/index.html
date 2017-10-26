@@ -11,7 +11,14 @@
 
 
 <div id="principal">
-    <div id="puntaje"> 0 - Vidas 3</div>
+    <div id="resultado">
+        <p id="puntaje"> 0 </p>
+        <div id="vidas">
+            <img id="vida0" src="img/batman-vida.png" alt="">
+            <img id="vida1" src="img/batman-vida.png" alt="">
+            <img id="vida2" src="img/batman-vida.png" alt="">
+        </div>
+    </div>
     <div id="reproductor">
         <audio>
                 <source src="intro.mp3" type="audio/mpeg">
@@ -20,10 +27,13 @@
     </div>
     <ul id="btn-list">
         <li><button id="btn-play" class="btn-options" estado=0>Jugar</button></li>
-        <li><button id="" class="btn-options" estado=0>Opciones</button></li>
-        <li><button id="" class="btn-options" estado=0>Instrucciones</button></li>
-        <li><button id="" class="btn-options" estado=0>Salir</button></li>
+        <li><button id="btn-instrucciones" class="btn-options" estado=0>Instrucciones</button></li>
+        <div id="instrucciones" style="display: none">
+            <p> Objetivo: Destruir las cajas que se aproximan</p>
+            <p> Controles: Flecha arriba golpear</p> 
+        </div>
     </ul>
+    
     
     <div id="back8"></div>
     <div id="back7"></div>

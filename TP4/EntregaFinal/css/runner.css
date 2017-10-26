@@ -34,6 +34,7 @@ body{
     height: 100%;
     width: 100%;
     margin: 0px;
+    background-color: #131313;
 }
 
 .fondo{
@@ -50,7 +51,7 @@ body{
     background: url('../img/batman2.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: 0px 0px; 
+    background-position: 254px 280px; 
     /* to 150 from -250*/
     /* 943x650 */
     z-index: 8;
@@ -120,7 +121,7 @@ audio{
     text-transform: uppercase;
     font-size: 30px;
     padding: 10px;
-    display: none;
+    margin: 0px;
 }
 .speakerplay {
     background-position: 0 0;
@@ -129,8 +130,7 @@ audio{
 #principal{
     width: 960px;
     height: 540px;
-    overflow: hidden;
-    align-content: center;
+    overflow-x: hidden;
 }
 
 .enemigo{
@@ -146,4 +146,28 @@ audio{
     /* to 150 from -250*/
     /* 943x650 */
     z-index: 7;
+    overflow: hidden;
 }  
+#instrucciones{
+    position: absolute;
+    color: white;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid grey;
+    width: 296px;
+}
+
+#vidas{
+    position: relative;
+    z-index: 13;
+    
+}
+#vidas img{
+    width: 10%;
+    height: 10%;
+}
+
+#resultado{
+    position: absolute;
+    display: none;
+}
