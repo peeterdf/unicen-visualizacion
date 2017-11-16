@@ -12,12 +12,13 @@
 
 <div id="principal">
     <div id="resultado">
-        <p id="puntaje"> 0 </p>
+        <p id="puntaje">Puntos: 0 </p>
         <div id="vidas">
             <img id="vida0" src="img/batman-vida.png" alt="">
             <img id="vida1" src="img/batman-vida.png" alt="">
             <img id="vida2" src="img/batman-vida.png" alt="">
         </div>
+        
     </div>
     <div id="reproductor">
         <audio>
@@ -29,8 +30,11 @@
         <li><button id="btn-play" class="btn-options" estado=0>Jugar</button></li>
         <li><button id="btn-instrucciones" class="btn-options" estado=0>Instrucciones</button></li>
         <div id="instrucciones" style="display: none">
-            <p> Objetivo: Destruir las cajas que se aproximan</p>
-            <p> Controles: Flecha arriba golpear</p> 
+            <p> El objetivo del juego es avanzar la mayor distancia posible esquivando o destruyendo las cajas que se aproximan</p>
+            <hr>
+            <p> CONTROLES</p>
+            <p><span><img id="keyup" src="img/arriba.png" alt=""></span> Saltar
+               <span><img id="keyright" src="img/arriba.png" alt=""></span> Pegar</p> 
         </div>
     </ul>
     
@@ -45,7 +49,13 @@
     <div id="back1"></div>
 
     <div id="fondo-inicio"></div>
-     
+    <div id="puntaje-final">
+        <p>Puntaje</p>
+        <p id="puntaje-total"></p>
+        <button id="btn-reiniciar">Reiniciar</button>
+        <button id="btn-menu">Menu</button>
+    </div>
+    
     <div id="player" ></div>
 </div>
 </body>
