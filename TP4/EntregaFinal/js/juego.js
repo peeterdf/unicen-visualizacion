@@ -97,7 +97,9 @@ Juego.prototype.dibujarEscenario=function(){
   document.getElementById('reproductor').style.display='block';
   this.crearEnemigos= setInterval("juego1.iniciarEnemigos()",3500);
 
+  if(this.musica==0){
   setTimeout(function(){ document.getElementsByTagName('audio')[0].play(); },1500); 
+  }
   
 }
 
@@ -148,9 +150,7 @@ Juego.prototype.update=function(){
   /* update */
   for (var index = 0; index < this.enemigos.length; index++) {
     var enemigo = this.enemigos[index]; 
-    /* if(enemigo.offsetLeft<905 && enemigo.offsetLeft>895){
-      enemigo.style.backgroundPosition="0px 0px";
-    }    */
+    
     if (enemigo.offsetLeft ==1900){
       enemigo.style.marginLeft= '-100px';
     }else{
@@ -163,14 +163,13 @@ Juego.prototype.update=function(){
           this.jugador.puntos=this.jugador.puntos+100;
           enemigo.style.animation ='romper-caja 1s steps(7) 1';
           //////////
-          console.log('pow');
           var p=document.createElement("div");
           p.setAttribute("id", "pow");  
           p.style.top=enemigo.style.top;
           p.style.left=enemigo.style.left;
           document.getElementById('principal').appendChild(p);
           pow=document.getElementById('pow');
-          setTimeout(function(){document.getElementById('principal').removeChild(pow); },1000);
+          setTimeout(function(){document.getElementById('principal').removeChild(document.getElementById('pow')); },1000);
           
           
           ///////////
