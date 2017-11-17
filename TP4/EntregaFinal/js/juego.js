@@ -36,7 +36,7 @@ Juego.prototype.termino = function(){
     var enemigo = this.enemigos[index];    
     enemigo.style.transition="";
   }
-  document.getElementById('puntaje-total').innerHTML=this.jugador.puntos;
+  document.getElementById('cantidad-puntos').innerHTML=this.jugador.puntos;
   document.getElementById('puntaje-final').style.display = "block";
   this.andando=2; 
   
@@ -95,8 +95,9 @@ Juego.prototype.dibujarEscenario=function(){
   document.getElementById('btn-list').style.display='none';
   document.getElementById('resultado').style.display='block';
   document.getElementById('reproductor').style.display='block';
-  this.crearEnemigos= setInterval("juego1.iniciarEnemigos()",3000);
-  /* document.getElementsByTagName('audio')[0].play();  */
+  this.crearEnemigos= setInterval("juego1.iniciarEnemigos()",3500);
+
+  setTimeout(function(){ document.getElementsByTagName('audio')[0].play(); },1500); 
   
 }
 
@@ -106,7 +107,7 @@ Juego.prototype.iniciarEnemigos=function(){
   e.setAttribute("id", "enemigo"+this.cantEnemigos);
   e.setAttribute("class", "enemigo");
   e.style.backgroundImage ='url(\'img/box2.png\')';
-  e.style.transition= 'margin-left 20s linear';
+  e.style.transition= 'margin-left 17s linear';
   this.enemigos.push(e); 
   document.getElementById('principal').appendChild(e);
   
@@ -197,10 +198,7 @@ Juego.prototype.update=function(){
 var juego1 = new Juego();
 var batman= new Jugador(3,-30,document.getElementById('player'));
 juego1.setJugador(batman);
-/* function play(){
-  juego1.andando=1;
-  juego1.play();
-} */
+
  document.getElementById('btn-play').onclick=function(){
     juego1.play(); 
  } 

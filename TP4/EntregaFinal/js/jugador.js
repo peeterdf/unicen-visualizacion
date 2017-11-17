@@ -40,7 +40,7 @@ Jugador.prototype.golpear = function(){
     this.correr();
   });   
   document.getElementById('player').style.background= "url('img/golpe123.png')";
-  this.documentElement.style.animation ='player-knock 2s steps(8) 1';   
+  this.documentElement.style.animation ='player-knock 1.5s steps(8) 1';   
 }
 
 Jugador.prototype.morir = function(){
@@ -54,6 +54,6 @@ Jugador.prototype.saltar = function(){
     this.correr();
   }); 
   document.getElementById('player').style.background= "url('img/jump123.png')";
-  document.getElementById('player').style.animation ='player-jump 2.5s steps(8) 1'; 
+  document.getElementById('player').style.animation ='player-jump 2s steps(8) 1'; 
 }
 
